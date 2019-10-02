@@ -8,6 +8,8 @@ app = Flask(__name__)
 
 API_KEY = os.environ.get("API_KEY", "")
 
+print(API_KEY)
+
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
