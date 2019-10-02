@@ -38,6 +38,8 @@ def query(city, date):
     print("===")
 
     weather = json_object['list']
+    forecast = "unknown..."
+
     for i in range(0, 30):
         if date in weather[i]['dt_txt']:
             forecast = weather[i]['weather'][0]['description']
