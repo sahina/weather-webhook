@@ -30,6 +30,11 @@ def webhook():
 def query(city, date):
     url = f'https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}'
     json_object = requests.get(url).json()
+
+    print("=== api respose")
+    print(json_object)
+    print("===")
+
     weather = json_object['list']
     for i in range(0, 30):
         if date in weather[i]['dt_txt']:
