@@ -62,7 +62,7 @@ def makeResponse(req):
     response = query(city, date)
     weather = response['forecast']
 
-    speech = f'The forecast for ${city} for ${date} is ${weather}'
+    speech = f'The forecast for {city} for {date} is {weather}'
 
     return {
         'source': 'whipdata-weather-webhook',
