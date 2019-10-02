@@ -25,21 +25,19 @@ def webhook():
     return response
 
 
-def query(city, date):
+def query(city: str, date: str):
     API_KEY = os.environ.get("API_KEY", "")
-
     url = f'https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={API_KEY}'
-    print("URL:", url)
-
     json_object = requests.get(url).json()
 
-    print("=== api respose")
+    print("=== api respose from open weather map")
     print(json_object)
     print("===")
 
     weather = json_object['list']
     forecast = "unknown..."
 
+    date = date.split("T")[0]
     for i in range(0, 30):
         if date in weather[i]['dt_txt']:
             forecast = weather[i]['weather'][0]['description']
@@ -62,7 +60,7 @@ def makeResponse(req):
     response = query(city, date)
     weather = response['forecast']
 
-    speech = f'The forecast for {city} for {date} is {weather}'
+    speech = f'The forecast for {city} in {date} is {weather}'
 
     return {
         'source': 'whipdata-weather-webhook',
