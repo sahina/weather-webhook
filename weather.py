@@ -6,10 +6,6 @@ from flask import Flask, request, make_response
 
 app = Flask(__name__)
 
-API_KEY = os.environ.get("API_KEY", "")
-
-print(API_KEY)
-
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -30,6 +26,7 @@ def webhook():
 
 
 def query(city, date):
+    API_KEY = os.environ.get("API_KEY", "")
     url = f'https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}'
     json_object = requests.get(url).json()
 
