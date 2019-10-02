@@ -30,6 +30,8 @@ def query(city, date):
     print("API KEY:", API_KEY)
 
     url = f'https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}'
+    print("URL:", url)
+
     json_object = requests.get(url).json()
 
     print("=== api respose")
