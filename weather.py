@@ -57,7 +57,7 @@ def makeResponse(req):
     city = parameters.get('geo-city')
     date = parameters.get('date')
 
-    response = query(date, city)
+    response = query(city, date)
     weather = response['forecast']
 
     speech = f'The forecast for ${city} for ${date} is ${weather}'
