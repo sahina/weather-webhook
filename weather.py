@@ -12,8 +12,10 @@ API_KEY = os.getenv("API_KEY")
 @app.route('/webhook', methods=['POST'])
 def webhook():
     # incoming request
+    print("=== incoming request")
     req = request.get_json(silent=True, force=True)
     print(json.dumps(req))
+    print("===")
 
     # call open weather api
     res = makeResponse(req)
