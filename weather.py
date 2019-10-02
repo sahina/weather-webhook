@@ -6,7 +6,7 @@ from flask import Flask, request, make_response
 
 app = Flask(__name__)
 
-API_KEY = os.getenv("API_KEY")
+API_KEY = os.environ.get("API_KEY", "")
 
 
 @app.route('/webhook', methods=['POST'])
