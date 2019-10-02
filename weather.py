@@ -28,7 +28,7 @@ def webhook():
 
 
 def query(city, date):
-    url = f'api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}'
+    url = f'https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}'
     json_object = requests.get(url).json()
     weather = json_object['list']
     for i in range(0, 30):
