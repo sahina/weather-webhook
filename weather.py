@@ -1,10 +1,13 @@
 import json
 import os
 import requests
+from typing import Dict
 
 from flask import Flask, request, make_response
 
 app = Flask(__name__)
+
+API_KEY = os.environ.get("API_KEY", "")
 
 
 @app.route('/webhook', methods=['POST'])
@@ -25,14 +28,22 @@ def webhook():
     return response
 
 
-def query(city: str, date: str):
-    API_KEY = os.environ.get("API_KEY", "")
-    url = f'https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={API_KEY}'
-    json_object = requests.get(url).json()
+def simplify_date(date: str) -> str:
+    """Splits date time and return YYYY-MM-DD formatted string"""
 
-    print("=== api respose from open weather map")
-    print(json_object)
-    print("===")
+    return date.split("T")[0]
+
+
+def url_for_city(city) -> str:
+    """Build open map api url for 5 day forecast for given city"""
+
+    return f'https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={API_KEY}'
+
+
+def query(city: str, date: str) -> Dict:
+    date = simplify_date(date)
+    url = url_for_city(city)
+    json_object = requests.get(url).json()
 
     weather = json_object['list']
     forecast = "unknown..."
@@ -49,7 +60,7 @@ def query(city: str, date: str):
     }
 
 
-def makeResponse(req):
+def makeResponse(req) -> Dict:
     """Calls open weather api for forecast"""
 
     result = req.get('queryResult')
