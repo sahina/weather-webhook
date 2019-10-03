@@ -66,7 +66,7 @@ def makeResponse(req) -> Dict:
     result = req.get('queryResult')
     parameters = result.get('parameters')
     city = parameters.get('geo-city')
-    date = parameters.get('date')
+    date = simplify_date(parameters.get('date'))
 
     response = query(city, date)
     weather = response['forecast']

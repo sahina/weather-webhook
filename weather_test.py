@@ -10,5 +10,4 @@ def test_simplify_date():
 
 
 def test_url_for_city():
-    print(url_for_city("london"))
     assert "london" in url_for_city("london")
